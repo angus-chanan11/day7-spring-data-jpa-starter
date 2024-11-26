@@ -47,14 +47,32 @@ public class EmployeeService {
     }
 
     public Employee update(Integer employeeId , Employee employee) {
-        Employee employeeExisted = employeeInMemoryRepository.findById(employeeId);
+        Employee employeeExisted = findById(employeeId);
         if(!employeeExisted.getActive())
             throw new EmployeeInactiveException();
 
-        return employeeInMemoryRepository.update(employeeId, employee);
+        updateEmployeeAttributes(employeeExisted, employee);
+
+        return employeeRepository.save(employeeExisted);
     }
 
     public void delete(Integer employeeId) {
         employeeInMemoryRepository.deleteById(employeeId);
+    }
+
+    private Employee updateEmployeeAttributes(Employee employeeStored, Employee newEmployee) {
+        if (newEmployee.getName() != null) {
+            employeeStored.setName(newEmployee.getName());
+        }
+        if (newEmployee.getAge() != null) {
+            employeeStored.setAge(newEmployee.getAge());
+        }
+        if (newEmployee.getGender() != null) {
+            employeeStored.setGender(newEmployee.getGender());
+        }
+        if (newEmployee.getSalary() != null) {
+            employeeStored.setSalary(newEmployee.getSalary());
+        }
+        return employeeStored;
     }
 }
