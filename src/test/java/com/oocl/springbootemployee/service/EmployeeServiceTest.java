@@ -53,7 +53,7 @@ class EmployeeServiceTest {
     void should_return_the_created_employee_when_create_given_a_employee() {
         //given
         Employee lucy = new Employee(1, "Lucy", 18, Gender.FEMALE, 8000.0);
-        when(mockedEmployeeInMemoryRepository.create(any())).thenReturn(lucy);
+        when(mockedEmployeeRepository.save(any())).thenReturn(lucy);
 
         //when
         Employee createdEmployee = employeeService.create(lucy);
@@ -69,7 +69,7 @@ class EmployeeServiceTest {
         //when
         //then
         assertThrows(EmployeeAgeNotValidException.class, () -> employeeService.create(kitty));
-        verify(mockedEmployeeInMemoryRepository, never()).create(any());
+        verify(mockedEmployeeRepository, never()).save(any());
     }
 
     @Test
@@ -79,7 +79,7 @@ class EmployeeServiceTest {
         //when
         //then
         assertThrows(EmployeeAgeNotValidException.class, () -> employeeService.create(kitty));
-        verify(mockedEmployeeInMemoryRepository, never()).create(any());
+        verify(mockedEmployeeRepository, never()).save(any());
     }
 
     @Test
@@ -89,7 +89,7 @@ class EmployeeServiceTest {
         //when
         employeeService.create(lucy);
         /* then */
-        verify(mockedEmployeeInMemoryRepository).create(argThat(Employee::getActive));
+        verify(mockedEmployeeRepository).save(argThat(Employee::getActive));
     }
 
     @Test
@@ -99,7 +99,7 @@ class EmployeeServiceTest {
         //when
         //then
         assertThrows(EmployeeAgeSalaryNotMatchedException.class, () -> employeeService.create(bob));
-        verify(mockedEmployeeInMemoryRepository, never()).create(any());
+        verify(mockedEmployeeRepository, never()).save(any());
     }
 
     @Test
