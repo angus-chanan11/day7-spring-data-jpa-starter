@@ -33,11 +33,6 @@ public class Company {
         this.employees = employees;
     }
 
-    public Company(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public Company() {}
 
     public Company(String name) {
