@@ -60,7 +60,7 @@ public class EmployeeService {
     }
 
     public void delete(Integer employeeId) {
-        employeeInMemoryRepository.deleteById(employeeId);
+        employeeRepository.deleteById(employeeId);
     }
 
     private Employee updateEmployeeAttributes(Employee employeeStored, Employee newEmployee) {
