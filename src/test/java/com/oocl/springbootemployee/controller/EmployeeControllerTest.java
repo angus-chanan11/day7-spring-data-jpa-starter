@@ -161,7 +161,7 @@ class EmployeeControllerTest {
     @Test
     void should_update_employee_success() throws Exception {
         // Given
-        Integer givenId = 1;
+        Integer givenId = employeeRepository.findAll().get(0).getId();
         String givenName = "New Employee";
         Integer givenAge = 30;
         Gender givenGender = Gender.FEMALE;
